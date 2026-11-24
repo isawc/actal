@@ -3,6 +3,8 @@
 
 > **Protótipo acadêmico para mobilidade vertical inteligente, auditável e preparada para interação entre pessoas, elevadores, sensores, sistemas de manutenção e robôs autônomos.**
 
+[Abrir a demonstração no GitHub Pages](https://isawc.github.io/actal/) · [Repositório original do ACTAL](https://github.com/dansfisica85/actal)
+
 ## Glossário
 
 [Acessar o glossário do projeto ACTAL no Google Sheets](https://docs.google.com/spreadsheets/d/1NxJeTh6UZ89C2rDOTAm28M-oyFSO0CX7xZA7zZhBrT0/edit?gid=1112006981#gid=1112006981)
@@ -444,11 +446,27 @@ O sistema também modifica a barra de navegação durante a rolagem e anima sequ
 
 # 19. Como executar
 
-O MVP é client-side. Para desenvolvimento local, basta servir o diretório por um servidor HTTP e abrir o `index.html`.
+O MVP é um site estático em HTML, CSS e JavaScript. Para rodar localmente com Python 3, execute o comando abaixo na raiz do repositório e abra [http://localhost:8000](http://localhost:8000).
 
-Também pode ser publicado como site estático, pois a demonstração atual não depende de backend próprio para executar suas animações.
+```sh
+python -m http.server 8000
+```
 
-Algumas bibliotecas são carregadas por CDN, portanto a conexão com a internet é necessária para a experiência completa quando esses recursos não estiverem armazenados localmente.
+O `index.html` contém a estrutura da página. Os estilos ficam em `assets/css/styles.css` e os scripts em `assets/js/`.
+
+| Script | Responsabilidade |
+| --- | --- |
+| `interface.js` | Navegação e animações da página |
+| `digital-twin.js` | Gêmeo digital 3D e seleção de cenários |
+| `telemetria.js` | Indicadores e simulação de blocos do DTL |
+| `emergencia.js` | Simulação de emergência |
+| `prioridade.js` | Calculadora do índice de prioridade |
+| `robos.js` | Simulação da frota de robôs |
+| `laboratorio.js` | Cenários que ligam telemetria, prioridade e emergência |
+
+Os scripts são carregados no fim do HTML. O laboratório é carregado por último porque usa funções das outras simulações.
+
+O GitHub Pages publica o site a partir da raiz de `main`. Os caminhos de arquivos são relativos para funcionar tanto na hospedagem como no servidor local. Bootstrap e as demais bibliotecas externas são carregados por CDN e precisam de conexão com a internet quando ainda não estão no cache do navegador.
 
 ---
 
